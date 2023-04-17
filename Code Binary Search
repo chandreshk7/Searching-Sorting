@@ -1,0 +1,21 @@
+from typing import *
+
+def binarySearch(arr : List[int], n : int, x : int):
+    m=0
+    L=m
+    u=n-1
+    while L<=u:
+        m= (L+u)//2
+        if x == arr[m]:
+            return m
+            break
+        elif x<arr[m]:
+            m = m-1
+            u = m
+        elif x>arr[m]:
+            m = m+1
+            L = m
+
+    return -1
+    
+    
