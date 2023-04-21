@@ -1,0 +1,62 @@
+from sys import stdin
+
+def sumOfTwoArrays(arr1, n, arr2, m, output):
+    carry = 0
+    p = len(output) - 1
+    j = len(arr2) - 1
+    for i in range(len(arr1) - 1, -1, -1):
+        num = 0
+        if j >= 0:
+            num = arr1[i] + arr2[j] + carry
+            j -= 1
+        else:
+            num = arr1[i] + carry
+        carry = num // 10
+        output[p] = num % 10
+        p -= 1
+
+    while j >= 0:
+        num = arr2[j] + carry
+        carry = num // 10
+        output[p] = num % 10
+        p -= 1
+        j -= 1
+
+    if carry > 0:
+        output[p] = carry
+
+
+
+
+#Taking Input Using Fast I/O
+def takeInput() :
+    n = int(stdin.readline().rstrip())
+    if n == 0 :
+        return list(), 0
+    
+    arr = list(map(int, stdin.readline().rstrip().split(" ")))
+    return arr, n
+
+
+#to print the array/list
+def printList(arr, n) :
+    for i in range(n) :
+        print(arr[i], end = " ")
+    
+    print()
+
+
+#main
+t = int(stdin.readline().rstrip())
+
+while t > 0 :
+    arr1, n = takeInput()
+    arr2, m = takeInput()
+    
+    outputSize = (1 + max(n, m))
+    output = outputSize * [0]
+    
+    sumOfTwoArrays(arr1, n, arr2, m, output)
+    printList(output, outputSize)
+    
+    t -= 1
